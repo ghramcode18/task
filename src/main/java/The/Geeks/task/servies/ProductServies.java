@@ -10,5 +10,9 @@ import The.Geeks.task.models.ProductModel;
 public interface ProductServies {
 
     public List<ProductModel> fetchProducts();
-    
+
+    public ProductModel createProduct(ProductModel productModel);
+
+    public ProductModel updateProduct(ProductModel productModel);
+
 }

@@ -1,8 +1,5 @@
 package The.Geeks.task.entities;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -32,31 +29,24 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "products")
+@Table(name = "clients")
 @Data
 @AllArgsConstructor
 @Setter
 @Getter
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
-public class Product {
+public class Client {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String description;
+    private String lastName;
+    private String mobile;
 
     @JsonIgnore
-    @JsonProperty("category")
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "categoryID", nullable = true)
-    private Category category;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Product> Products;
 
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate creationDate;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "clientid", nullable = true)
-    private Client client;
 }
