@@ -1,5 +1,8 @@
 package The.Geeks.task.entities;
 
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,24 +34,25 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "sales")
 @Data
 @AllArgsConstructor
 @Setter
 @Getter
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
-public class Client {
-    
+public class Sales {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
-    private String lastName;
-    private String mobile;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Product> Products;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate creationDate;
 
+
+    @ManyToMany
+    @JoinTable(name = "salesProducts",
+     joinColumns = @JoinColumn(name = "sales_id"), 
+     inverseJoinColumns = @JoinColumn(name = "products_id"))
+    Set<Product> salesProducts;
 }

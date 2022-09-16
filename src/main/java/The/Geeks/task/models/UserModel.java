@@ -33,7 +33,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class ClientModel {
+public class UserModel {
     private Long id;
     private String name;
     private String lastName;

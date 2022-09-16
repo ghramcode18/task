@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import The.Geeks.task.models.ClientModel;
+import The.Geeks.task.models.UserModel;
 
 @Service
 public interface ClientServiece {
-    public List<ClientModel> fetchClients();
+    public List<UserModel> fetchClients();
     
-    public ClientModel createClient(ClientModel clientModel);
+    public UserModel createClient(UserModel clientModel);
 
         
 }

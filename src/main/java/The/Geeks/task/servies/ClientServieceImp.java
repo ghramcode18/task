@@ -8,23 +8,23 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
-import The.Geeks.task.entities.Client;
-import The.Geeks.task.models.ClientModel;
-import The.Geeks.task.repository.clientRepo;
+import The.Geeks.task.entities.User;
+import The.Geeks.task.models.UserModel;
+import The.Geeks.task.repository.UserRepo;
 
 @Service
 public class ClientServieceImp implements ClientServiece {
 
     @Autowired
-    clientRepo clientRepo;
+    UserRepo clientRepo;
 
-    public List<ClientModel> fetchClients() {
-        List<Client> Clients = new ArrayList();
+    public List<UserModel> fetchClients() {
+        List<User> Clients = new ArrayList();
         Clients = clientRepo.findAll();
-        List<ClientModel> ClientsModel = new ArrayList();
+        List<UserModel> ClientsModel = new ArrayList();
 
-        for (Client c : Clients) {
-            ClientModel clientModel = new ClientModel();
+        for (User c : Clients) {
+            UserModel clientModel = new UserModel();
             clientModel.setId(c.getId());
             clientModel.setMobile(c.getMobile());
             clientModel.setLastName(c.getLastName());
@@ -37,8 +37,8 @@ public class ClientServieceImp implements ClientServiece {
         return ClientsModel;
     }
 
-    public ClientModel createClient(ClientModel clientModel) {
-        Client client = new Client();
+    public UserModel createClient(UserModel clientModel) {
+        User client = new User();
 
         client.setId(clientModel.getId());
         client.setName(clientModel.getName());
@@ -53,8 +53,8 @@ public class ClientServieceImp implements ClientServiece {
 
     }
 
-    public ClientModel updateClient(ClientModel clientModel) {
-        Optional<Client> client =clientRepo.findById(clientModel.getId());
+    public UserModel updateClient(UserModel clientModel) {
+        Optional<User> client =clientRepo.findById(clientModel.getId());
 
         client.get().setId(clientModel.getId());
         client.get().setName(clientModel.getName());

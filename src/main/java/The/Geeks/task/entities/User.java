@@ -1,8 +1,5 @@
 package The.Geeks.task.entities;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -12,10 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,32 +33,43 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "products")
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @Setter
 @Getter
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
-public class Product {
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String description;
+    private String lastName;
+    private String mobile;
 
-    @JsonIgnore
-    @JsonProperty("category")
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "categoryID", nullable = true)
-    private Category category;
+    /*
+     * @JsonIgnore
+     * 
+     * @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade =
+     * CascadeType.ALL)
+     * private Set<Product> Products;
+     */
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Saller sallers;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate creationDate;
+    @ManyToMany
+    @JoinTable(name = "haveing", 
+    joinColumns = @JoinColumn(name = "user_id"), 
+    inverseJoinColumns = @JoinColumn(name = "sallers_id"))
+    Set<Saller> haveing;
 
-
-
-    @ManyToMany(mappedBy = "salesProducts")
-    Set<Sales>sales;
+    @ManyToMany
+    @JoinTable(name = "buying",
+     joinColumns = @JoinColumn(name = "user_id"), 
+     inverseJoinColumns = @JoinColumn(name = "sallers_id"))
+    Set<Saller> buying;
 }

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import The.Geeks.task.models.ClientModel;
 import The.Geeks.task.models.ProductModel;
+import The.Geeks.task.models.UserModel;
 import The.Geeks.task.servies.ClientServieceImp;
 import The.Geeks.task.servies.ProductServiesImp;
 
@@ -25,14 +25,14 @@ public class ClientController {
     }
     
     @RequestMapping(value = "/createClient", method = RequestMethod.POST)
-    public Object createClient(@RequestBody ClientModel clientModel) {
+    public Object createClient(@RequestBody UserModel clientModel) {
 
         return clientServieceImp.createClient(clientModel);
 
     }
 
     @RequestMapping(value = "/updateClient", method = RequestMethod.POST)
-    public Object updateClient(@RequestBody ClientModel clientModel) {
+    public Object updateClient(@RequestBody UserModel clientModel) {
 
         return clientServieceImp.updateClient(clientModel);
 
