@@ -2,6 +2,7 @@ package The.Geeks.task.entities;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -49,10 +50,19 @@ public class Sales {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate creationDate;
 
-
     @ManyToMany
-    @JoinTable(name = "salesProducts",
-     joinColumns = @JoinColumn(name = "sales_id"), 
-     inverseJoinColumns = @JoinColumn(name = "products_id"))
-    Set<Product> salesProducts;
+    @JoinTable(name = "salesItem",
+     joinColumns = @JoinColumn(name = "sales_id"),
+      inverseJoinColumns = @JoinColumn(name = "products_id"))
+    Set<Product> salesItem;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "sales", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<User> Users;
+    
+     
+
+    private double total;
+
+
 }

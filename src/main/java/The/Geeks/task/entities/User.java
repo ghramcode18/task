@@ -48,28 +48,16 @@ public class User {
     private String name;
     private String lastName;
     private String mobile;
+    private boolean saller;
 
-    /*
-     * @JsonIgnore
-     * 
-     * @OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade =
-     * CascadeType.ALL)
-     * private Set<Product> Products;
-     */
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Saller sallers;
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "salesId", nullable = true)
+    private Sales sales;
 
-    @ManyToMany
-    @JoinTable(name = "haveing", 
-    joinColumns = @JoinColumn(name = "user_id"), 
-    inverseJoinColumns = @JoinColumn(name = "sallers_id"))
-    Set<Saller> haveing;
 
-    @ManyToMany
-    @JoinTable(name = "buying",
-     joinColumns = @JoinColumn(name = "user_id"), 
-     inverseJoinColumns = @JoinColumn(name = "sallers_id"))
-    Set<Saller> buying;
+
+
+    
 }

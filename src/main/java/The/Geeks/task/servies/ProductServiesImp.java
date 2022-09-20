@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 
 import The.Geeks.task.entities.Category;
 import The.Geeks.task.entities.Product;
+import The.Geeks.task.entities.Sales;
 import The.Geeks.task.models.ProductModel;
+import The.Geeks.task.models.SalesModel;
+import The.Geeks.task.models.UserModel;
+import The.Geeks.task.repository.SalesRepo;
 import The.Geeks.task.repository.categoryRepo;
 import The.Geeks.task.repository.productRepo;
 
@@ -23,6 +27,8 @@ public class ProductServiesImp implements ProductServies {
     @Autowired
     categoryRepo categoryRepo;
 
+    @Autowired
+    SalesRepo salesRepo;
     @Override
     public List<ProductModel> fetchProducts() {
         List<Product> Products = new ArrayList();
@@ -82,5 +88,22 @@ public class ProductServiesImp implements ProductServies {
         return p;
 
     }
+
+
+    public SalesModel fetchAllSales()
+    {
+        List<Sales> Sales = new ArrayList();
+        Sales = salesRepo.findAll();
+
+        for(int i = 0; i < Sales.size(); i++){
+        Sales.get(i).getUsers().get(i).getSales().equals(1);
+
+
+        }
+        return null;
+        
+    }
+
+
 
 }

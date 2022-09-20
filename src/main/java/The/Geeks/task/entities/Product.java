@@ -59,6 +59,6 @@ public class Product {
 
 
 
-    @ManyToMany(mappedBy = "salesProducts")
-    Set<Sales>sales;
+    @ManyToMany(mappedBy = "salesItem")
+    Set<Sales> salesItem;
 }

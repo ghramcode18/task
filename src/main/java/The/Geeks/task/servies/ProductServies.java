@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import The.Geeks.task.models.ProductModel;
+import The.Geeks.task.models.SalesModel;
+import The.Geeks.task.models.UserModel;
 
 @Service
 public interface ProductServies {
@@ -14,5 +16,9 @@ public interface ProductServies {
     public ProductModel createProduct(ProductModel productModel);
 
     public ProductModel updateProduct(ProductModel productModel);
+
+    public SalesModel fetchAllSales(   );
+
+
 
 }
