@@ -97,21 +97,26 @@ public class ProductServiesImp implements ProductServies {
         List<SalesModel> salesModels = new ArrayList();
 
 
+
         for ( int i = 0; i < Sales.size(); i++) {
 
             SalesModel  saleModel = new SalesModel();
 
-            if(Sales.get(i).getUsers().get(i).isSaller()==true) 
-            saleModel.setSaller(Sales.get(i).getUsers().get(i).getName());
+            for (int j = 0; j < Sales.size(); j++) {
+            
+                if(Sales.get(i).getUsers().get(i).isSaller()==true) 
+                saleModel.setSaller(Sales.get(i).getUsers().get(i).getName());
 
+                if (Sales.get(i).getUsers().get(j).isSaller() == false)
+                saleModel.setClient(Sales.get(i).getUsers().get(j).getName());
+
+    }
             saleModel.setId(Sales.get(i).getId());
             saleModel.setCreationDate(Sales.get(i).getCreationDate());
             saleModel.setTotal(Sales.get(i).getTotal());
 
 
-            if (Sales.get(i).getUsers().get(i+1).isSaller() == false)
-                saleModel.setClient(Sales.get(i).getUsers().get(i+1).getName());
-
+            
             salesModels.add(saleModel);
 
         }
