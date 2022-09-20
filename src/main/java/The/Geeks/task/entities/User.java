@@ -27,6 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
 public class User {
@@ -49,6 +51,18 @@ public class User {
     private String lastName;
     private String mobile;
     private boolean saller;
+
+    public boolean isSaller() {
+        return this.saller;
+    }
+
+    public boolean getSaller() {
+        return this.saller;
+    }
+
+    public void setSaller(boolean saller) {
+        this.saller = saller;
+    }
 
 
     @JsonIgnore

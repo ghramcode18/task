@@ -29,6 +29,7 @@ public class ProductServiesImp implements ProductServies {
 
     @Autowired
     SalesRepo salesRepo;
+
     @Override
     public List<ProductModel> fetchProducts() {
         List<Product> Products = new ArrayList();
@@ -89,21 +90,34 @@ public class ProductServiesImp implements ProductServies {
 
     }
 
-
-    public SalesModel fetchAllSales()
-    {
+    public List<SalesModel> fetchAllSales() {
         List<Sales> Sales = new ArrayList();
         Sales = salesRepo.findAll();
 
-        for(int i = 0; i < Sales.size(); i++){
-        Sales.get(i).getUsers().get(i).getSales().equals(1);
+        List<SalesModel> salesModels = new ArrayList();
 
+
+        for ( int i = 0; i < Sales.size(); i++) {
+
+            SalesModel  saleModel = new SalesModel();
+
+            if(Sales.get(i).getUsers().get(i).isSaller()==true) 
+            saleModel.setSaller(Sales.get(i).getUsers().get(i).getName());
+
+            saleModel.setId(Sales.get(i).getId());
+            saleModel.setCreationDate(Sales.get(i).getCreationDate());
+            saleModel.setTotal(Sales.get(i).getTotal());
+
+
+            if (Sales.get(i).getUsers().get(i+1).isSaller() == false)
+                saleModel.setClient(Sales.get(i).getUsers().get(i+1).getName());
+
+            salesModels.add(saleModel);
 
         }
-        return null;
-        
+
+        return salesModels;
+
     }
-
-
 
 }

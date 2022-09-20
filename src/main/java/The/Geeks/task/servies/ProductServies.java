@@ -17,7 +17,7 @@ public interface ProductServies {
 
     public ProductModel updateProduct(ProductModel productModel);
 
-    public SalesModel fetchAllSales(   );
+    public List<SalesModel> fetchAllSales(   );
 
 
 

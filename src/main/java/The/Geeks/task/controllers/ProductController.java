@@ -36,4 +36,11 @@ public class ProductController {
         return productServiesImp.updateProduct(productModel);
 
     }
+
+    @RequestMapping(value = "/fetchAllSales", method = RequestMethod.GET)
+    public Object fetchAllSales() {
+
+        return productServiesImp.fetchAllSales();
+
+    }
 }

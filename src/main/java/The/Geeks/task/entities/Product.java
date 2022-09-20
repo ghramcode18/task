@@ -27,6 +27,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @NoArgsConstructor
 public class Product {
@@ -58,7 +60,7 @@ public class Product {
     private LocalDate creationDate;
 
 
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "salesItem")
     Set<Sales> salesItem;
 }
